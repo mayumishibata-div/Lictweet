@@ -7,13 +7,15 @@
                     <li>
                         <%= link_to '詳細', tweet_path(tweet.id), method: :get %>
                     </li>
-                    <li>
-                        <%= link_to '編集', edit_tweet_path(tweet.id), method: :get %>
-                    </li>
-                    <li>
-                        <!--<%= link_to '削除', "/tweets/#{tweet.id}", method: :delete %>-->
-                        <%= link_to '削除', tweet_path(tweet.id), method: :delete %>
-                    </li>
+                    <% if user_signed_in? && current_user.id == tweet.user_id %>
+                        <li>
+                            <%= link_to '編集', edit_tweet_path(tweet.id), method: :get %>
+                        </li>
+                        <li>
+                            <!--<%= link_to '削除', "/tweets/#{tweet.id}", method: :delete %>-->
+                            <%= link_to '削除', tweet_path(tweet.id), method: :delete %>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
             <p><%= tweet.text %></p>
